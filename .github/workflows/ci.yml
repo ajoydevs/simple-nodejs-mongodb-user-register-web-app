@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 on:
   push:
     branches: [main]
@@ -15,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "24"
           cache: 'npm'
 
       - name: Install dependencies
@@ -40,11 +43,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "24"
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build (syntax check)
-        run: npm run prod --dry-run
+        run: |
+          for file in main.js routes/routes.js models/users.js; do
+            if [ -f "$file" ]; then
+              node --check "$file" || exit 1
+            fi
+          done
