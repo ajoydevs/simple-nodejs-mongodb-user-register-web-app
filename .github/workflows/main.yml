@@ -2,7 +2,7 @@ name: RegisterApp CI Pipeline
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 jobs:
   ai-code-review:
@@ -20,4 +20,5 @@ jobs:
           pr_number: ${{ github.event.number }}
           ai_provider: "google"
           google_api_key: ${{ secrets.GOOGLE_API_KEY }}
-          google_model: "gemini-2.5-flash-lite"
+          google_model: "gemini-2.5-flash"
+          include_extensions: ".js"
