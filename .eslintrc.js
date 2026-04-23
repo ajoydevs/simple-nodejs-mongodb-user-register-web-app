@@ -1,0 +1,11 @@
+module.exports = {
+  env: {
+    node: true,
+    es2022: true,
+  },
+  extends: ["eslint:recommended"],
+  ignorePatterns: ["node_modules/", "uploads/", "views/"],
+  parserOptions: {
+    ecmaVersion: "latest",
+  },
+};
