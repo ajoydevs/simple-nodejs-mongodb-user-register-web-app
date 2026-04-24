@@ -104,7 +104,7 @@ describe('POST /add - Insert a new user', () => {
       .field('email', 'charlie@example.com')
       .field('phone', '5551234567');
 
-    expect(res.status).toBe(302);
+    expect(res.status).toBe(200); // INTENTIONALLY WRONG - should be 302
     expect(res.headers.location).toBe('/');
     expect(User._saveMock).toHaveBeenCalled();
   });
